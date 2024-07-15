@@ -1,8 +1,6 @@
 namespace App.Main;
-// (string Name, bool isSelected, bool isHovered);
 public class CliOption<TValue>
 {
-
     public CliOption(string label, TValue value, bool isSelected, bool isHovered)
     {
         Label = label;
