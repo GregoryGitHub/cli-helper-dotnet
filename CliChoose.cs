@@ -1,23 +1,24 @@
 namespace App.Main;
 
-public class Cli
+public class CliChoose
 {
     private int cursorY = 0;
-    private bool isSelecting = true;
 
-    public IEnumerable<Option> Choose(string title, IEnumerable<Option> optionsParam)
+    public IEnumerable<UserOption<TValue>>? ChooseMany<TValue>(string title, IEnumerable<UserOption<TValue>> optionsParam)
     {
         cursorY = 0;
-        var options = optionsParam.ToList();
+        var options = optionsParam.Select(option => new CliOption<TValue>(option.Label, option.Value, false, false)).ToList();
 
         if (options.Count == 0)
         {
             Console.WriteLine("A lista não pode ser vazia");
+            return default;
         }
+
 
         options[0].IsHovered = true;
 
-        while (isSelecting)
+        while (true)
         {
             Console.Clear();
             Console.WriteLine($"{title}\n");
@@ -48,16 +49,13 @@ public class Cli
                     break;
 
                 case ConsoleKey.Enter:
-                    Console.WriteLine("Você Apertou o Entrer");
-
-                    return options;
+                    Console.Clear();
+                    return options.Where(op=> op.IsSelected).Select(option => new UserOption<TValue>(option.Label, option.Value));
             }
         }
-
-        return options;
     }
 
-    private void IncreaseCursor(List<Option> options)
+    private void IncreaseCursor<TValue>(List<CliOption<TValue>> options)
     {
         if (cursorY == options.Count - 1) return;
 
@@ -72,7 +70,7 @@ public class Cli
         cursorY--;
     }
 
-    private void HoverActualCursor(List<Option> options)
+    private void HoverActualCursor<TValue>(List<CliOption<TValue>> options)
     {
         for (var index = 0; index < options.Count; index++)
         {
@@ -82,7 +80,8 @@ public class Cli
 
         options[cursorY].IsHovered = true;
     }
-    private void Render(List<Option> options)
+    
+    private void Render<TValue>(List<CliOption<TValue>> options)
     {
         for (int i = 0; i < options.Count; i++)
         {
@@ -105,7 +104,7 @@ public class Cli
                 Console.Write("[ ] ");
             }
 
-            Console.WriteLine(options[i].Name);
+            Console.WriteLine(options[i].Label);
         }
     }
 

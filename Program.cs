@@ -6,19 +6,26 @@ public class Program
 {
     public static void Main()
     {
-        var options = new List<Option>
+        var options = new List<UserOption<int>>
         {
-            new Option("Opção 1", false, false),
-            new Option("Opção 2", false, false),
-            new Option("Opção 3", false, false),
-            new Option("Opção 4", false, false),
-            new Option("Opção 5", false, false),
-            new Option("Opção 6", false, false),
+            new UserOption<int>("Opção 1", 1),
+            new UserOption<int>("Opção 2", 2),
+            new UserOption<int>("Opção 3", 3),
+            new UserOption<int>("Opção 4", 4),
+            new UserOption<int>("Opção 5", 5),
+            new UserOption<int>("Opção 6", 6),
         };
 
-        var cli = new Cli();
+        var cliChoose = new CliChoose();
 
-        cli.Choose("Escolha suas opções:", options);
+        var selecionados = cliChoose.ChooseMany("Escolha suas opções:", options);
+
+        Console.WriteLine("Você escolheu as seguintes opções:");
+
+        foreach (var selecionado in selecionados)
+        {
+            Console.WriteLine(selecionado.Label);
+        }
     }
 
 
