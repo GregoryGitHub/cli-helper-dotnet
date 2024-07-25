@@ -6,12 +6,10 @@ public class Program
     {
         var options = new List<UserOption<int>>
         {
-            new UserOption<int>("Opção 1", 1),
-            new UserOption<int>("Opção 2", 2),
-            new UserOption<int>("Opção 3", 3),
-            new UserOption<int>("Opção 4", 4),
-            new UserOption<int>("Opção 5", 5),
-            new UserOption<int>("Opção 6", 6),
+            new UserOption<int>("NAF Meios Pagamento 1", 1),
+            new UserOption<int>("Hub Antifraude 2", 2),
+            new UserOption<int>("Reservas 3", 3),
+            new UserOption<int>("Núcleo Clientes 4", 4)
         };
 
         var lista2 = new List<UserOption<string>>
@@ -24,19 +22,34 @@ public class Program
 
         var cliChoose = new CliChoose();
 
-        var selecionados = cliChoose.ChooseMany("Escolha suas opções:", options);
+        // var selecionados = cliChoose.ChooseMany("Escolha suas opções:", options);
+
+        // Console.WriteLine("Você escolheu as seguintes opções:");
+
+        // foreach (var selecionado in selecionados)
+        // {
+        //     Console.WriteLine(selecionado.Label);
+        // }
+
+        // var opcaoEscolhida = cliChoose.ChooseOne("Escolha uma opção:", lista2);
+
+        // Console.WriteLine("Você escolheu a seguinte opção:");
+        // Console.WriteLine(opcaoEscolhida.Label);
+
+        var opcoesEscolhidas = cliChoose.SearchAndChooseMany("Escolha um sistema para iniciar:", options);
+
+        if (opcoesEscolhidas == null)
+        {
+            Console.WriteLine("Nenhuma opção selecionada");
+            return;
+        }
 
         Console.WriteLine("Você escolheu as seguintes opções:");
 
-        foreach (var selecionado in selecionados)
+        foreach (var opcaoEscolhida in opcoesEscolhidas)
         {
-            Console.WriteLine(selecionado.Label);
+            Console.WriteLine(opcaoEscolhida.Label);
         }
-
-        var opcaoEscolhida = cliChoose.ChooseOne("Escolha uma opção:", lista2);
-
-        Console.WriteLine("Você escolheu a seguinte opção:");
-        Console.WriteLine(opcaoEscolhida.Label);
     }
 
 
