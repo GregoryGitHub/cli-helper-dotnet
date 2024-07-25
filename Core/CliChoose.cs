@@ -1,4 +1,6 @@
-namespace App.Main;
+using CliHelperDotnet.Core.Models;
+
+namespace CliHelperDotnet.Core;
 
 public enum ChooseMode
 {

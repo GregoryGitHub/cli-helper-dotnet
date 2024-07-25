@@ -1,4 +1,4 @@
-namespace App.Main;
+namespace CliHelperDotnet.Core.Models;
 
 public class UserOption<TValue>
 {

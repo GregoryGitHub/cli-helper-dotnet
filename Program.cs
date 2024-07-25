@@ -1,4 +1,7 @@
-﻿namespace App.Main;
+﻿using CliHelperDotnet.Core;
+using CliHelperDotnet.Core.Models;
+
+namespace CliHelperDotnet;
 
 public class Program
 {
@@ -20,7 +23,35 @@ public class Program
             new UserOption<string>("Opção única 4", "4"),
         };
 
-        var cliChoose = new CliChoose();
+        var listaTabela = new List<Dictionary<string, string>>
+        {
+            new Dictionary<string, string>
+            {
+                {"Nome", "João"},
+                {"Idade", "20"},
+                {"Cidade", "São Paulo"}
+            },
+            new Dictionary<string, string>
+            {
+                {"Nome", "Maria"},
+                {"Idade", "30"},
+                {"Cidade", "Rio de Janeiro"}
+            },
+            new Dictionary<string, string>
+            {
+                {"Nome", "José"},
+                {"Idade", "40"},
+                {"Cidade", "Curitiba"}
+            },
+            new Dictionary<string, string>
+            {
+                {"Nome", "Isbela Cabral"},
+                {"Idade", "32"},
+                {"Cidade", "São Lourenço da Mata PE"}
+            }
+        };
+
+        // var cliChoose = new CliChoose();
 
         // var selecionados = cliChoose.ChooseMany("Escolha suas opções:", options);
 
@@ -36,20 +67,24 @@ public class Program
         // Console.WriteLine("Você escolheu a seguinte opção:");
         // Console.WriteLine(opcaoEscolhida.Label);
 
-        var opcoesEscolhidas = cliChoose.SearchAndChooseMany("Escolha um sistema para iniciar:", options);
+        // var opcoesEscolhidas = cliChoose.SearchAndChooseMany("Escolha um sistema para iniciar:", options);
 
-        if (opcoesEscolhidas == null)
-        {
-            Console.WriteLine("Nenhuma opção selecionada");
-            return;
-        }
+        // if (opcoesEscolhidas == null)
+        // {
+        //     Console.WriteLine("Nenhuma opção selecionada");
+        //     return;
+        // }
 
-        Console.WriteLine("Você escolheu as seguintes opções:");
+        // Console.WriteLine("Você escolheu as seguintes opções:");
 
-        foreach (var opcaoEscolhida in opcoesEscolhidas)
-        {
-            Console.WriteLine(opcaoEscolhida.Label);
-        }
+        // foreach (var opcaoEscolhida in opcoesEscolhidas)
+        // {
+        //     Console.WriteLine(opcaoEscolhida.Label);
+        // }
+
+        var cliTable = new CliTable();
+
+        cliTable.Render(listaTabela);
     }
 
 

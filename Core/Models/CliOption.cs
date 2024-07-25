@@ -1,4 +1,4 @@
-namespace App.Main;
+namespace CliHelperDotnet.Core.Models;
 public class CliOption<TValue>
 {
     public CliOption(string label, TValue value, bool isSelected, bool isHovered)

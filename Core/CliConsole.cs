@@ -1,6 +1,8 @@
-using System;
 
-namespace App.Main;
+
+using CliHelperDotnet.Core.Enums;
+
+namespace CliHelperDotnet.Core;
 
 public static class CliConsole
 {
